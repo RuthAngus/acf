@@ -33,7 +33,7 @@ jump_arr = scipy.array([131.51139, 169.51883, 169.75000, 182.00000, 200.31000,
                        874.50000, 906.84469, 937.00000, 970.00000, 1001.20718,
                        1032.50000, 1063.50000 ,1071.00000, 1093.60000])
 
-def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
+def corr_run(time, flux, flux_err, id, savedir=None, saveplot=False):
 
     id_list = [id]
     # Create empty arrays
@@ -204,9 +204,10 @@ def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
         else: error = dlag_per_err[x]
 
         print('PERIOD = ', period[x], '+/-', error)
-        print('saving as', '%s/%s_result.txt'%(savedir, id_list[0]))
-        np.savetxt('%s/%s_result.txt'%(savedir, id_list[0]),
-                   np.transpose((period[x], error)))
+        if savedir:
+            print('saving as', '%s/%s_result.txt'%(savedir, id_list[0]))
+            np.savetxt('%s/%s_result.txt'%(savedir, id_list[0]),
+                    np.transpose((period[x], error)))
     else:
         blank = np.array([0,0])
 #         np.savetxt('%s/%s_result.txt' %(savedir, id_list[0]), blank)
