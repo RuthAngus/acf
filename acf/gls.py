@@ -1,7 +1,7 @@
 import scipy
 import scipy.linalg
 import pylab
-import mpfit
+import acf.mpfit
 #from planet import orbit
 
 mach = scipy.MachAr()

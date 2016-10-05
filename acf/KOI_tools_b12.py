@@ -1,6 +1,6 @@
 import scipy, pyfits, atpy, glob, pylab, copy, os
 
-import keplerdefs
+import acf.keplerdefs
 
 #PlanetCands = atpy.Table('/Volumes/Data/kepler/Planet_Cands/Bahtalha12_PlanetCandidates.txt', type='ascii',name='PlanetCands')
 

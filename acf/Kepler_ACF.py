@@ -16,10 +16,10 @@ import collections
 no_rpy = True
 import scipy.io
 from scipy import signal
-import KOI_tools_b12 as kt
-import filter
-import gls
-import mpfit
+import acf.KOI_tools_b12 as kt
+import acf.filter
+import acf.gls
+import acf.mpfit
 import pyfits
 import matplotlib.pyplot as pl
 
@@ -69,7 +69,6 @@ def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
     pylab.figure(1,(12, 9))
     pylab.clf()
     pylab.subplot(4,1,1)
-    pylab.xlim(period[x] * 10)
     pylab.title('ID: %s' %(id_list[0]), fontsize = 16)
     for j in scipy.arange(tablen):
         if j % 2 == 0:
@@ -125,7 +124,6 @@ def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
 
     pylab.figure(1)
     pylab.subplot(4,1,4)
-    pylab.xlim(period[x] * 10)
     pylab.plot(acf_tab.lags_days, acf_tab.acf_smooth, 'k-')
     pylab.axhline(0, ls = '--', c = 'k')
     for i in scipy.arange(len(acf_per_pos)):
@@ -164,7 +162,6 @@ def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
             pylab.axvspan(med_dlag_per[x]-dlag_per_err[x], \
                           med_dlag_per[x]+dlag_per_err[x],\
                 facecolor = 'k', alpha=0.2)
-        pylab.xlim(period[x] * 10)
 
         # variability stats
         print('calculating var for P_med...')
@@ -182,7 +179,6 @@ def corr_run(time, flux, flux_err, id, savedir, saveplot=True):
         pylab.text(0.415, -0.15, 'Time (days)', transform = ax.transAxes)
         pylab.text(0.415, -1.4, 'Period (days)', transform = ax.transAxes)
         pylab.ylabel('Amplitudes')
-        pylab.xlim(period[x] * 10)
 
         if saveplot:
             print("saving figure", "%s/%s_full.png" % (savedir, id_list[0]))
@@ -361,7 +357,7 @@ def pgram_calc(time, flux, interval, kid, max_psearch_len):
     pmin = 0.1
     pmax = interval * max_psearch_len
     nf = 1000
-    sinout = gls.sinefit(time, flux, err = None, pmin = pmin, pmax = pmax, nper = nf, \
+    sinout = acf.gls.sinefit(time, flux, err = None, pmin = pmin, pmax = pmax, nper = nf, \
                              doplot = False, return_periodogram = True)
 
     sine_per = sinout[0]
