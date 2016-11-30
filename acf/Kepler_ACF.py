@@ -230,7 +230,8 @@ def corr_run(time, flux, flux_err, id, savedir=None, saveplot=False):
     t.add_column('harmonic_det', harmonic_det)
     t.add_column('amp_all', amp_all)
     t.add_column('amp_per', amp_per)
-    return float(period), float(dlag_per_err)
+    return float(period), float(dlag_per_err), acf_tab.lags_days, \
+        acf_tab.acf_smooth
 
 def acf_calc(time, flux, interval, kid, max_psearch_len):
 
