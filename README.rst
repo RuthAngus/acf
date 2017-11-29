@@ -1,7 +1,12 @@
 acf
 --------
 
-To infer an age from a rotation period and (B-V) colour::
+Installation:
+
+Clone this repository and cd into it.
+    >>> python setup.py install
+
+To measure a rotation period from a light curve:
 
     >>> from simple_acf import simple_acf
     >>> period, acf, lags, rvar, peaks = simple_acf(time, flux)
